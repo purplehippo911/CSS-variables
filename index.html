@@ -12,7 +12,7 @@
             <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
             <label for="blur">Blur:</label>
-            <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+            <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px" data-name="hippodapotato" data-cool="🥞">
 
             <label for="base">Base Color:</label>
             <input type="color" name="base" value="#ffc600">       
@@ -31,6 +31,8 @@
                 padding:var(--spacing);
                 background:var(--base);
                 filter:blur(var(--blur));
+                width:300px;
+                height:300px;
             }
 
             .h1 {
@@ -38,16 +40,30 @@
             }
 
             body {
+                width:clamp(375px, 70%, 1400px);
                 text-align:center;
+                background:#193349;
+                color:white;
+                font-family:'helvetica neue', sans-serif;
+                font-weight: 100;
+                font-size: 50px;
+            }
+            .controls {
+                margin-bottom:50px;
+            }
+            
+            input {
+                width:100px;
             }
 
         </style>
 
         <script>
-            const inputs = document.querySelectorAll('.controls inputs');
+            const inputs = document.querySelectorAll('.controls input');
 
             function handleUpdate() {
-                console.log(this.value);
+                const suffix = this.dataset.sizing || ''
+                document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
             }
 
             inputs.forEach(input => input.addEventListener('change', handleUpdate));
